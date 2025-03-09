@@ -1,4 +1,23 @@
-# After creating folders and file structure now we will start with the namespaces respectively, you can now deploy them as pods in the cluster one by one: 
+# Author: Rupesh Vanneldas
+# Date: 08/03/2025
+# Description: This script is used to deploy a simple web application with MySQL database in a Kubernetes cluster using kind.
+# Note: This script is tested on Windows 10 with WSL2 and Amazon Linux 2 EC2 instance. For run this script you need to have kind and kubectl installed on your machine (Hint: You can check init_kind.sh script to install kind and kubectl on your machine).
+
+# Create a kind cluster with the provided kind.yaml file for that do the following:
+chmod +x ./init_kind.sh
+./init_kind.sh
+
+# Check the version of kind and kubectl
+kind version
+kubectl version --client
+
+# Verify the cluster
+kubectl cluster-info --context kind-kind
+# For example my Kubernetes control plane is running at https://127.0.0.1:52706
+kubectl get nodes
+
+# After creating folders and file structure now we will start with the namespaces respectively.
+# You can now deploy them as pods in the cluster one by one: 
 
 # First MySQL
 kubectl create namespace mysql-ns
