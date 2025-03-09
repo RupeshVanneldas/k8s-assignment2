@@ -21,4 +21,6 @@ spec:
         - containerPort: 3306
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "<REPLACE_WITH_YOUR_PASSWORD>"
+          value: "password"
+      imagePullSecrets:
+      - name: ecr-secret

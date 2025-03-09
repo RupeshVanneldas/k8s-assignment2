@@ -27,8 +27,10 @@ spec:
         - name: DBUSER
           value: "root"
         - name: DBPWD
-          value: "<REPLACE_WITH_YOUR_PASSWORD>"
+          value: "password"
         - name: DATABASE
           value: "employees"
         - name: APP_COLOR
           value: "blue"
+      imagePullSecrets:
+      - name: ecr-secret  # Reference the secret here

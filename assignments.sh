@@ -1,7 +1,9 @@
 # Author: Rupesh Vanneldas
 # Date: 08/03/2025
 # Description: This script is used to deploy a simple web application with MySQL database in a Kubernetes cluster using kind.
-# Note: This script is tested on Windows 10 with WSL2 and Amazon Linux 2 EC2 instance. For run this script you need to have kind and kubectl installed on your machine (Hint: You can check init_kind.sh script to install kind and kubectl on your machine).
+# Note: This script is tested on Windows 11 with WSL2 and Amazon Linux 2 EC2 instance. For run this script you need to have kind and kubectl installed on your machine (Hint: You can check init_kind.sh script to install kind and kubectl on your machine).
+
+# Clone the repository and navigate to the directory
 
 # Create a kind cluster with the provided kind.yaml file for that do the following:
 chmod +x ./init_kind.sh
@@ -21,13 +23,23 @@ kubectl get nodes
 
 # First MySQL
 kubectl create namespace mysql-ns
-kubectl apply -f mysql/pod.yaml
+aws ecr get-login-password --region us-east-1 | kubectl create secret docker-registry ecr-secret \
+  --docker-server=115287631585.dkr.ecr.us-east-1.amazonaws.com \
+  --docker-username=AWS \
+  --docker-password=$(aws ecr get-login-password --region us-east-1) \
+  --namespace=mysql-ns
+kubectl apply -f mysql/pod.yaml # First edit the image name in the pod.yaml file
 kubectl apply -f mysql/service.yaml
 kubectl get pods --all-namespaces # You should see the mysql pod running
 kubectl get svc --all-namespaces # You should see the mysql service running
 
 # Second Web
 kubectl create namespace web-ns
+aws ecr get-login-password --region us-east-1 | kubectl create secret docker-registry ecr-secret \
+  --docker-server=115287631585.dkr.ecr.us-east-1.amazonaws.com \
+  --docker-username=AWS \
+  --docker-password=$(aws ecr get-login-password --region us-east-1) \
+  --namespace=web-ns
 kubectl apply -f web/pod.yaml
 kubectl apply -f web/service.yaml
 kubectl get pods --all-namespaces # You should see both web and mysql pod running
