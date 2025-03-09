@@ -3,6 +3,10 @@
 # Description: This script is used to deploy a simple web application with MySQL database in a Kubernetes cluster using kind.
 # Note: This script is tested on Windows 11 with WSL2 and Amazon Linux 2 EC2 instance. For run this script you need to have kind and kubectl installed on your machine (Hint: You can check init_kind.sh script to install kind and kubectl on your machine).
 
+#SSH into the EC2 instance
+chmod 400 ass1-prod
+ssh -i ass1-prod ec2-user@<EC2-Instance-IP>
+
 # Clone the repository and navigate to the directory
 git clone https://github.com/RupeshVanneldas/k8s-assignment2.git
 
