@@ -15,12 +15,12 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: 115287631585.dkr.ecr.us-east-1.amazonaws.com/clo835-ass1:my_db_v1
+        image: <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/<ECR_REPO_NAME>:my_db_v1
         imagePullPolicy: Always
         ports:
         - containerPort: 3306
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "password"
+          value: "<YOUR_DB_ROOT_PASSWORD>"
       imagePullSecrets:
       - name: ecr-secret
